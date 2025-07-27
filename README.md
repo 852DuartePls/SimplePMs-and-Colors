@@ -1,6 +1,7 @@
-# SimplePMs
+# SimplePMs and Colors 
 
-## Releases available on [Modrinth](https://modrinth.com/plugin/simplepms)
+## Original plugin releases on [Modrinth](https://modrinth.com/plugin/simplepms)
+>*No copy of this modification will be distributed anywhere besides this source code repository*
 
 Simple plugin for handling direct messaging that features:
 
@@ -10,6 +11,7 @@ Simple plugin for handling direct messaging that features:
 - Custom formatting with Placeholder API integration
 - Social Spy
 - Ability to message users from the console, and them to message back
+- MiniMessage and partial Legacy color support
 
 ### Commands
 
@@ -40,6 +42,10 @@ Simple plugin for handling direct messaging that features:
 | `message.admin.console-spy`  |   OP    | Shows a log of any direct messages being sent between the console and players (from this plugin)                 |
 | `message.bypass.social-spy`  |   OP    | Prevents messages you send or messages being sent to you from being shown to others with social spy              |
 | `message.bypass.command-spy` |   OP    | Prevents commands you send from being shown to social spy                                                        |
+| `simplepms.use.color`        |   OP    | Allows using minimessage color codes (`<_colorname_>`) and &0-&f                                                 |
+| `simplepms.use.decoration`   |   OP    | Allows using minimessage decorations and newlines, and &l-&r                                                     |
+| `simplepms.use.clicks`       |   OP    | Allows using hover, click, and insertion tags                                                                    |
+| `simplepms.use.all`          |   OP    | Allows using both color and decoration codes                                                                     |
 
 ### PlaceholderAPI integration
 
