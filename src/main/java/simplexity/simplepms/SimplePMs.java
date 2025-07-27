@@ -86,6 +86,11 @@ public final class SimplePMs extends JavaPlugin {
         getServer().getPluginManager().addPermission(Constants.ADMIN_CONSOLE_SPY);
         getServer().getPluginManager().addPermission(Constants.BYPASS_SOCIAL_SPY);
         getServer().getPluginManager().addPermission(Constants.BYPASS_COMMAND_SPY);
+
+        getServer().getPluginManager().addPermission(Constants.ALLOW_COLORS);
+        getServer().getPluginManager().addPermission(Constants.ALLOW_DECORATIONS);
+        getServer().getPluginManager().addPermission(Constants.ALLOW_CLICKS);
+        getServer().getPluginManager().addPermission(Constants.ALLOW_ALL);
     }
 
     @Override

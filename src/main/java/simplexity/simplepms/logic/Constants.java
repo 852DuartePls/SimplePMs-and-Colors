@@ -44,4 +44,13 @@ public class Constants {
     public static Permission BYPASS_COMMAND_SPY = new Permission("message.bypass.command-spy",
             "Stops your commands from being shown to others with command spy (if they are configured to be tracked). " +
             "Does not prevent the message from being formatted on console", PermissionDefault.OP);
+
+    public static final Permission ALLOW_COLORS = new Permission("simplepms.use.color",
+            "Allows using minimessage color codes (<_colorname_>)", PermissionDefault.OP);
+    public static final Permission ALLOW_DECORATIONS = new Permission("simplepms.use.decoration",
+            "Allow MiniMessage decorations and newlines", PermissionDefault.OP);
+    public static final Permission ALLOW_CLICKS = new Permission("simplepms.use.clicks",
+            "Allows using hover, click, and insertion tags", PermissionDefault.OP);
+    public static final Permission ALLOW_ALL = new Permission("simplepms.use.all",
+            "Allows using minimessage color and decoration codes", PermissionDefault.OP);
 }
