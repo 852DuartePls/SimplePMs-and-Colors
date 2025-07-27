@@ -31,18 +31,20 @@ public class MessageUtils {
                                   boolean socialSpy) {
         Component senderComponent = getCommmandSenderComponent(initiator, socialSpy);
         Component targetComponent = getCommmandSenderComponent(target, socialSpy);
+        Component messageComponent = parseMessageContent(initiator, messageContent);
         return miniMessage.deserialize(localeMessage,
                 Placeholder.component("initiator", senderComponent),
                 Placeholder.component("target", targetComponent),
-                Placeholder.unparsed("message", messageContent));
+                Placeholder.component("message", messageComponent));
     }
 
     public Component parseMessage(String localeMessage, @NotNull CommandSender initiator, String command, String messageContent, boolean socialSpy) {
         Component senderComponent = getCommmandSenderComponent(initiator, socialSpy);
+        Component messageComponent = parseMessageContent(initiator, messageContent);
         return miniMessage.deserialize(localeMessage,
                 Placeholder.component("initiator", senderComponent),
                 Placeholder.unparsed("command", command),
-                Placeholder.unparsed("message", messageContent));
+                Placeholder.component("message", messageComponent));
     }
 
 
@@ -59,7 +61,7 @@ public class MessageUtils {
         return parsePapiName(player, ConfigHandler.getInstance().getNormalFormat());
     }
 
-    private Component parseName(Player player, String message) {
+    private @NotNull Component parseName(@NotNull Player player, String message) {
         return miniMessage.deserialize(
                 message,
                 Placeholder.component("displayname", player.displayName()),
@@ -67,7 +69,7 @@ public class MessageUtils {
         );
     }
 
-    private Component parsePapiName(Player player, String message) {
+    private @NotNull Component parsePapiName(Player player, String message) {
         return miniMessage.deserialize(
                 message,
                 papiTag(player),
@@ -87,4 +89,33 @@ public class MessageUtils {
         });
     }
 
+    private @NotNull Component parseMessageContent(@NotNull CommandSender sender, @NotNull String content) {
+        TagResolver tags = ColorPerm.buildResolver(sender);
+
+        content = convertLegacyToMiniMessage(content);
+
+        return MiniMessage.builder()
+                .strict(false)
+                .tags(tags)
+                .build()
+                .deserialize(content);
+    }
+
+    private @NotNull String convertLegacyToMiniMessage(@NotNull String input) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (c == '&' && i + 1 < input.length()) {
+                char code = Character.toLowerCase(input.charAt(i + 1));
+                String mini = ColorPerm.LEGACY_TO_MINI.get(code);
+                if (mini != null) {
+                    result.append('<').append(mini).append('>');
+                    i++;
+                    continue;
+                }
+            }
+            result.append(c);
+        }
+        return result.toString();
+    }
 }
